@@ -3,7 +3,7 @@
 The Event Planning System is a web application designed to help users organize, manage, and track events. It allows users to create events, manage tasks, RSVP to events, and categorize events. Additionally, users can follow each other and stay updated on their activities.
 
 ## Features
-User Registration and Management: Register, log in, and manage user profiles.  
+User Registration and Management: Register, log in, and manage profile profiles.  
 Event Creation and Management: Create, update, delete, and view events.  
 RSVP System: RSVP to events and view who else is attending.  
 Task Management: Create and assign tasks for events, and track their progress.  
@@ -53,9 +53,9 @@ Open your browser and go to http://localhost:8080.
 API Endpoints
 User Management
 
-POST /api/auth/register - Register a new user.
+POST /api/auth/register - Register a new profile.
 POST /api/auth/login - Log in to the system.
-GET /api/users/{id} - Get user profile details.
+GET /api/users/{id} - Get profile profile details.
 Event Management
 
 POST /api/events - Create a new event.
@@ -79,10 +79,10 @@ GET /api/categories - List all categories.
 GET /api/events/categories/{id} - List events by category.
 Social Features
 
-POST /api/users/{id}/follow - Follow a user.
-POST /api/users/{id}/unfollow - Unfollow a user.
-GET /api/users/{id}/following - List users that the current user is following.
-GET /api/users/{id}/followers - List users who are following the current user.
+POST /api/users/{id}/follow - Follow a profile.
+POST /api/users/{id}/unfollow - Unfollow a profile.
+GET /api/users/{id}/following - List users that the current profile is following.
+GET /api/users/{id}/followers - List users who are following the current profile.
 Testing
 To run tests, use the following command:
 
