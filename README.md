@@ -1,4 +1,4 @@
-# Event Planning System
+# Plannit: Event Planning System
 ## Overview
 The Event Planning System is a web application designed to help users organize, manage, and track events. It allows users to create events, manage tasks, RSVP to events, and categorize events. Additionally, users can follow each other and stay updated on their activities.
 
