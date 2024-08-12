@@ -5,6 +5,8 @@ import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProfileService {
     private final ProfileRepository profileRepository;
@@ -16,6 +18,10 @@ public class ProfileService {
     public Profile getProfileById(long id){
         return profileRepository.findById(id)
                 .orElseThrow(() -> new ProfileNotFoundException(id));
+    }
+
+    public List<Profile> getAllProfiles(){
+        return profileRepository.findAll();
     }
 
 }

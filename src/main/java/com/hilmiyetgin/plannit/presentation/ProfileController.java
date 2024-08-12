@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.modelmapper.ModelMapper;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/profile")
 public class ProfileController {
@@ -25,6 +27,13 @@ public class ProfileController {
         Profile profile = profileService.getProfileById(id);
         if (profile == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(modelMapper.map(profile, ProfileDTO.class));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<ProfileDTO>> getAllProfiles(){
+        List<Profile> allProfiles = profileService.getAllProfiles();
+        List<ProfileDTO> dtos = allProfiles.stream().map(p -> modelMapper.map(p, ProfileDTO.class)).toList();
+        return ResponseEntity.ok(dtos);
     }
 
 
