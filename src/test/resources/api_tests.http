@@ -1,0 +1,7 @@
+### Homepage
+
+GET http://localhost:8080
+
+### API: Get profile by ID
+
+GET http://localhost:8080/api/profile/1

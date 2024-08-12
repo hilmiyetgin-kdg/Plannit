@@ -7,7 +7,7 @@ import java.util.Set;
 @Table(name = "PROFILE")
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
     @Column(nullable = false, unique = true, length = 50)

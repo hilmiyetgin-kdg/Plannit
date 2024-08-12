@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"profile_id", "event_id"})})
 public class UserEvent {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")

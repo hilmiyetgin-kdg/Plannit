@@ -28,7 +28,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("javax.validation:validation-api:2.0.0.Final")
-
+	implementation("org.modelmapper:modelmapper:2.1.1")
 }
 
 tasks.withType<Test> {

@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "EVENT")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank
     @Column(nullable = false, unique = true, length = 50)
