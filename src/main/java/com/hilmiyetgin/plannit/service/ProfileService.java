@@ -5,6 +5,7 @@ import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class ProfileService {
     }
 
     //create
+    @Transactional
     public Profile addProfile(String username, String email, String password, String firstName, String lastName, String phoneNumber){
         if (profileRepository.existsByUsername(username)) {
             throw new DuplicateProfileException(String.format("Username '%s' is already taken", username));
@@ -40,5 +42,13 @@ public class ProfileService {
         return profileRepository.findAll();
     }
 
+    //update
+
+    //delete
+    @Transactional
+    public void deleteProfileById(long id){
+        Profile profile = profileRepository.findById(id).orElseThrow(() -> new ProfileNotFoundException(id));
+        profileRepository.delete(profile);
+    }
 
 }

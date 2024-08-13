@@ -2,6 +2,7 @@ package com.hilmiyetgin.plannit.presentation;
 
 import com.hilmiyetgin.plannit.domain.Profile;
 import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
+import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.presentation.DTO.NewProfileDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.ProfileDTO;
 import com.hilmiyetgin.plannit.service.ProfileService;
@@ -56,7 +57,14 @@ public class ProfileController {
     //update
 
     //delete
-
-
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteProfileById(@PathVariable long id){
+        try {
+            profileService.deleteProfileById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (ProfileNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

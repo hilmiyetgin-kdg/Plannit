@@ -51,3 +51,12 @@ Content-Type: application/json
   "lastName": "Doe",
   "phoneNumber": "+1234567890"
 }
+
+### API: Delete a profile by ID
+
+DELETE http://localhost:8080/api/profile/1
+
+### API: Attempt to delete a non existing profile by ID
+
+DELETE http://localhost:8080/api/profile/999
+
