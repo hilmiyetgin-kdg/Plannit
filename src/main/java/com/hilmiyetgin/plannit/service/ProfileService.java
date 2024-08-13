@@ -3,6 +3,7 @@ package com.hilmiyetgin.plannit.service;
 import com.hilmiyetgin.plannit.domain.Profile;
 import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
+import com.hilmiyetgin.plannit.presentation.DTO.UpdateProfileDTO;
 import com.hilmiyetgin.plannit.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,9 @@ public class ProfileService {
             throw new DuplicateProfileException(String.format("There is already an account for the email '%s'", email));
         }
 
+        //TODO: check password
+        //TODO: encrypt password
+
         Profile profile = new Profile(username, email, password, firstName, lastName, phoneNumber);
         return profileRepository.save(profile);
     }
@@ -43,6 +47,21 @@ public class ProfileService {
     }
 
     //update
+    @Transactional
+    public Profile updateProfile(long id, UpdateProfileDTO updatedProfile){
+        Profile existingProfile = profileRepository.findById(id).orElseThrow(() -> new ProfileNotFoundException(id));
+
+        existingProfile.setUsername(updatedProfile.getUsername());
+        existingProfile.setEmail(updatedProfile.getEmail());
+        existingProfile.setFirstName(updatedProfile.getFirstName());
+        existingProfile.setLastName(updatedProfile.getLastName());
+        existingProfile.setPhoneNumber(updatedProfile.getPhoneNumber());
+        //TODO: update password
+
+        return profileRepository.save(existingProfile);
+
+    }
+
 
     //delete
     @Transactional

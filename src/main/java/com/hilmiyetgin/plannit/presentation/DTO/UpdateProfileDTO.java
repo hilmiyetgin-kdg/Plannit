@@ -4,16 +4,18 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class NewProfileDTO {
+public class UpdateProfileDTO {
+    private long id;
     @NotBlank
     @Size(min = 3, max = 50)
     private String username;
     @NotBlank
     @Email
     private String email;
+    private String currentPassword;
     @NotBlank
     @Size(min = 8, max = 50)
-    private String password;
+    private String newPassword;
     @NotBlank
     @Size(min = 2, max = 50)
     private String firstName;
@@ -23,6 +25,14 @@ public class NewProfileDTO {
     @NotBlank
     @Size(min = 10, max = 15)
     private String phoneNumber;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -40,12 +50,20 @@ public class NewProfileDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCurrentPassword() {
+        return currentPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
     public String getFirstName() {
@@ -72,3 +90,5 @@ public class NewProfileDTO {
         this.phoneNumber = phoneNumber;
     }
 }
+
+

@@ -52,6 +52,21 @@ Content-Type: application/json
   "phoneNumber": "+1234567890"
 }
 
+### API: Update the username of a profile
+
+PUT http://localhost:8080/api/profile/1
+Content-Type: application/json
+
+{
+  "username": "johndoe999",
+  "email": "johndoe@example.com",
+  "password": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "phoneNumber": "+1234567890"
+}
+
+
 ### API: Delete a profile by ID
 
 DELETE http://localhost:8080/api/profile/1

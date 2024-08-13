@@ -5,6 +5,7 @@ import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.presentation.DTO.NewProfileDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.ProfileDTO;
+import com.hilmiyetgin.plannit.presentation.DTO.UpdateProfileDTO;
 import com.hilmiyetgin.plannit.service.ProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -55,6 +56,18 @@ public class ProfileController {
     }
 
     //update
+    @PutMapping("{id}")
+    public ResponseEntity<?> updateProfile(@PathVariable long id, @RequestBody @Valid UpdateProfileDTO dto){
+        try {
+            Profile updatedProfile = profileService.updateProfile(id, dto);
+            ProfileDTO responseDTO = modelMapper.map(updatedProfile, ProfileDTO.class);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+
+        } catch (ProfileNotFoundException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        }
+    }
 
     //delete
     @DeleteMapping("{id}")
@@ -62,8 +75,10 @@ public class ProfileController {
         try {
             profileService.deleteProfileById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
         } catch (ProfileNotFoundException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
         }
     }
 
