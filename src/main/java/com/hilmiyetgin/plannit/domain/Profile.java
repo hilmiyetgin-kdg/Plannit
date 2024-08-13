@@ -1,6 +1,7 @@
 package com.hilmiyetgin.plannit.domain;
 import jakarta.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -35,15 +36,15 @@ public class Profile {
     public Profile() {
     }
 
-    public Profile(String username, String email, String password, String firstName, String lastName, String phoneNumber, Set<Event> organizedEvents, Set<UserEvent> attendedEvents) {
+    public Profile(String username, String email, String password, String firstName, String lastName, String phoneNumber) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.organizedEvents = organizedEvents;
-        this.attendedEvents = attendedEvents;
+        this.organizedEvents = new HashSet<>();
+        this.attendedEvents = new HashSet<>();
     }
 
     public long getId() {

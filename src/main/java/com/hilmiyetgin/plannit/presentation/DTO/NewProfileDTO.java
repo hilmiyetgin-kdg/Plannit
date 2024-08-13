@@ -1,18 +1,32 @@
 package com.hilmiyetgin.plannit.presentation.DTO;
 
-public class ProfileDTO {
-    private long id;
+import javax.validation.constraints.NotBlank;
+
+public class NewProfileDTO {
+    @NotBlank
     private String username;
+    @NotBlank
     private String email;
+    @NotBlank
+    private String password;
+    @NotBlank
     private String firstName;
+    @NotBlank
     private String lastName;
+    @NotBlank
     private String phoneNumber;
 
-    public long getId() {
-        return id;
+    public NewProfileDTO() {
     }
 
-    public void setId(long id) { this.id = id;  }
+    public NewProfileDTO(String username, String email, String password, String firstName, String lastName, String phoneNumber) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getUsername() {
         return username;
@@ -28,6 +42,14 @@ public class ProfileDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {

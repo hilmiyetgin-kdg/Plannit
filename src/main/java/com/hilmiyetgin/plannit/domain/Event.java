@@ -37,6 +37,16 @@ public class Event {
     public Event() {
     }
 
+    public Event(String title, String description, String location, LocalDateTime startDate, LocalDateTime endDate, Profile organizer, Set<UserEvent> attendees) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.organizer = organizer;
+        this.attendees = attendees;
+    }
+
     public String getTitle() {
         return title;
     }

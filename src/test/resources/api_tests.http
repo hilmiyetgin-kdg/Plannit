@@ -9,3 +9,45 @@ GET http://localhost:8080/api/profile/1
 ### API: Get all profiles
 
 GET http://localhost:8080/api/profile
+
+### API: Create a profile
+
+POST http://localhost:8080/api/profile
+Content-Type: application/json
+
+{
+  "username": "hilmiyetgin",
+  "email": "hilmi.yetgin@example.com",
+  "password": "securePassword123",
+  "firstName": "Hilmi",
+  "lastName": "Yetgin",
+  "phoneNumber": "+41141235632"
+}
+
+### API: Attempt to create a profile where the username is already taken
+
+POST http://localhost:8080/api/profile
+Content-Type: application/json
+
+{
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "password": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "phoneNumber": "+1234567890"
+}
+
+### API: Attempt to create a profile where the email is already taken
+
+POST http://localhost:8080/api/profile
+Content-Type: application/json
+
+{
+  "username": "xxxx",
+  "email": "johndoe@example.com",
+  "password": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "phoneNumber": "+1234567890"
+}
