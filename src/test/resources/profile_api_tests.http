@@ -2,17 +2,19 @@
 
 GET http://localhost:8080
 
+# CRUD methods
+
 ### API: Get profile by ID
 
-GET http://localhost:8080/api/profile/1
+GET http://localhost:8080/api/profiles/1
 
 ### API: Get all profiles
 
-GET http://localhost:8080/api/profile
+GET http://localhost:8080/api/profiles
 
 ### API: Create a profile
 
-POST http://localhost:8080/api/profile
+POST http://localhost:8080/api/profiles
 Content-Type: application/json
 
 {
@@ -26,7 +28,7 @@ Content-Type: application/json
 
 ### API: Attempt to create a profile where the username is already taken
 
-POST http://localhost:8080/api/profile
+POST http://localhost:8080/api/profiles
 Content-Type: application/json
 
 {
@@ -40,7 +42,7 @@ Content-Type: application/json
 
 ### API: Attempt to create a profile where the email is already taken
 
-POST http://localhost:8080/api/profile
+POST http://localhost:8080/api/profiles
 Content-Type: application/json
 
 {
@@ -54,7 +56,7 @@ Content-Type: application/json
 
 ### API: Update the username of a profile
 
-PUT http://localhost:8080/api/profile/1
+PUT http://localhost:8080/api/profiles/1
 Content-Type: application/json
 
 {
@@ -69,9 +71,12 @@ Content-Type: application/json
 
 ### API: Delete a profile by ID
 
-DELETE http://localhost:8080/api/profile/1
+DELETE http://localhost:8080/api/profiles/1
 
 ### API: Attempt to delete a non existing profile by ID
 
-DELETE http://localhost:8080/api/profile/999
+DELETE http://localhost:8080/api/profiles/999
 
+### API: Get events organized by a user
+
+GET http://localhost:8080/api/profiles/4/events

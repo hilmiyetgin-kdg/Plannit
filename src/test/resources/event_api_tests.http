@@ -1,0 +1,21 @@
+### Homepage
+
+GET http://localhost:8080
+
+### API: Get event by ID
+
+GET http://localhost:8080/api/events/1
+
+### API: Create a new event
+
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "title": "Summer Tech Meetup 2024",
+  "description": "Join us for an evening of networking and tech talks from industry leaders. Topics will include AI, blockchain, and sustainable tech.",
+  "location": "TechHub Conference Center, 123 Innovation Street, Silicon Valley, CA 94000",
+  "startDate": "2024-09-15T18:00:00",
+  "endDate": "2024-09-15T21:30:00",
+  "organizerId": 4
+}

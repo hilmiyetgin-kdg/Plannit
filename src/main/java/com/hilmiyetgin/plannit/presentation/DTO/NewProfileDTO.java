@@ -5,22 +5,22 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class NewProfileDTO {
-    @NotBlank
+    @NotBlank(message = "Username is required")
     @Size(min = 3, max = 50)
     private String username;
-    @NotBlank
+    @NotBlank(message = "Email is required")
     @Email
     private String email;
-    @NotBlank
+    @NotBlank(message = "Password is required")
     @Size(min = 8, max = 50)
     private String password;
-    @NotBlank
+    @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50)
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "Last name is required")
     @Size(min = 2, max = 50)
     private String lastName;
-    @NotBlank
+    @NotBlank(message = "Phone number is required")
     @Size(min = 10, max = 15)
     private String phoneNumber;
 

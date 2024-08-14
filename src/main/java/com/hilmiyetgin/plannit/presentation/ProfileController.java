@@ -1,11 +1,14 @@
 package com.hilmiyetgin.plannit.presentation;
 
+import com.hilmiyetgin.plannit.domain.Event;
 import com.hilmiyetgin.plannit.domain.Profile;
 import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
+import com.hilmiyetgin.plannit.presentation.DTO.EventDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.NewProfileDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.ProfileDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.UpdateProfileDTO;
+import com.hilmiyetgin.plannit.service.EventService;
 import com.hilmiyetgin.plannit.service.ProfileService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -17,14 +20,16 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/profile")
+@RequestMapping("/api/profiles")
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final EventService eventService;
     private final ModelMapper modelMapper;
 
-    public ProfileController(ProfileService profileService, ModelMapper modelMapper) {
+    public ProfileController(ProfileService profileService, EventService eventService, ModelMapper modelMapper) {
         this.profileService = profileService;
+        this.eventService = eventService;
         this.modelMapper = modelMapper;
     }
 
@@ -32,7 +37,7 @@ public class ProfileController {
     @PostMapping
     public ResponseEntity<ProfileDTO> createProfile(@RequestBody @Valid NewProfileDTO dto){
         try {
-            Profile newProfile = profileService.addProfile(dto.getUsername(), dto.getEmail(), dto.getPassword(), dto.getFirstName(), dto.getLastName(), dto.getPhoneNumber());
+            Profile newProfile = profileService.addProfile(dto);
             ProfileDTO responseDTO = modelMapper.map(newProfile, ProfileDTO.class);
             return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
         } catch (DuplicateProfileException e){
@@ -46,6 +51,16 @@ public class ProfileController {
         Profile profile = profileService.getProfileById(id);
         if (profile == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return ResponseEntity.ok(modelMapper.map(profile, ProfileDTO.class));
+    }
+
+    //should this method be in EventController?
+    @GetMapping("/{organizerId}/events")
+    public ResponseEntity<List<EventDTO>> getEventsByOrganizer(@PathVariable Long organizerId) {
+        List<Event> events = eventService.getEventsByOrganizer(organizerId);
+        List<EventDTO> eventDTOs = events.stream()
+                .map(d -> modelMapper.map(d, EventDTO.class))
+                .toList();
+        return ResponseEntity.ok(eventDTOs);
     }
 
     @GetMapping()

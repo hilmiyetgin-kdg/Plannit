@@ -3,6 +3,7 @@ package com.hilmiyetgin.plannit.service;
 import com.hilmiyetgin.plannit.domain.Profile;
 import com.hilmiyetgin.plannit.exceptions.DuplicateProfileException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
+import com.hilmiyetgin.plannit.presentation.DTO.NewProfileDTO;
 import com.hilmiyetgin.plannit.presentation.DTO.UpdateProfileDTO;
 import com.hilmiyetgin.plannit.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
@@ -20,19 +21,20 @@ public class ProfileService {
 
     //create
     @Transactional
-    public Profile addProfile(String username, String email, String password, String firstName, String lastName, String phoneNumber){
-        if (profileRepository.existsByUsername(username)) {
-            throw new DuplicateProfileException(String.format("Username '%s' is already taken", username));
+    public Profile addProfile(NewProfileDTO dto){
+
+        if (profileRepository.existsByUsername(dto.getUsername())) {
+            throw new DuplicateProfileException(String.format("Username '%s' is already taken", dto.getUsername()));
         }
 
-        if (profileRepository.existsByEmail(email)) {
-            throw new DuplicateProfileException(String.format("There is already an account for the email '%s'", email));
+        if (profileRepository.existsByEmail(dto.getEmail())) {
+            throw new DuplicateProfileException(String.format("There is already an account for the email '%s'", dto.getEmail()));
         }
 
         //TODO: check password
         //TODO: encrypt password
 
-        Profile profile = new Profile(username, email, password, firstName, lastName, phoneNumber);
+        Profile profile = new Profile(dto.getUsername(), dto.getEmail(), dto.getPassword(), dto.getFirstName(), dto.getLastName(), dto.getPhoneNumber());
         return profileRepository.save(profile);
     }
 
@@ -61,7 +63,6 @@ public class ProfileService {
         return profileRepository.save(existingProfile);
 
     }
-
 
     //delete
     @Transactional
