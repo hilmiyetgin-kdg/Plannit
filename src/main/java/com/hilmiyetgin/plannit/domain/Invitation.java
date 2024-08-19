@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = {"profile_id", "event_id"})})
-public class UserEvent {
+public class Invitation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,10 +22,10 @@ public class UserEvent {
     @NotNull
     private LocalDateTime timestamp;
 
-    public UserEvent() {
+    public Invitation() {
     }
 
-    public UserEvent(Profile profile, Event event, Status rsvpStatus, LocalDateTime timestamp) {
+    public Invitation(Profile profile, Event event, Status rsvpStatus, LocalDateTime timestamp) {
         this.profile = profile;
         this.event = event;
         this.rsvpStatus = rsvpStatus;

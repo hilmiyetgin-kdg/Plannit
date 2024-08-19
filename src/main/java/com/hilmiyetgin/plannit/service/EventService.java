@@ -1,17 +1,16 @@
 package com.hilmiyetgin.plannit.service;
 
 import com.hilmiyetgin.plannit.domain.Event;
+import com.hilmiyetgin.plannit.domain.Invitation;
 import com.hilmiyetgin.plannit.domain.Profile;
 import com.hilmiyetgin.plannit.domain.Status;
-import com.hilmiyetgin.plannit.domain.UserEvent;
 import com.hilmiyetgin.plannit.exceptions.EventNotFoundException;
 import com.hilmiyetgin.plannit.exceptions.InvalidDateException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.presentation.DTO.NewEventDTO;
-import com.hilmiyetgin.plannit.presentation.DTO.UpdateEventDTO;
 import com.hilmiyetgin.plannit.repository.EventRepository;
 import com.hilmiyetgin.plannit.repository.ProfileRepository;
-import com.hilmiyetgin.plannit.repository.UserEventRepository;
+import com.hilmiyetgin.plannit.repository.InvitationRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,13 +24,13 @@ public class EventService {
 
     private final EventRepository eventRepository;
     private final ProfileRepository profileRepository;
-    private final UserEventRepository userEventRepository;
+    private final InvitationRepository invitationRepository;
     private final ModelMapper modelMapper;
 
-    public EventService(EventRepository eventRepository, ProfileRepository profileRepository, UserEventRepository userEventRepository, ModelMapper modelMapper) {
+    public EventService(EventRepository eventRepository, ProfileRepository profileRepository, InvitationRepository invitationRepository, ModelMapper modelMapper) {
         this.eventRepository = eventRepository;
         this.profileRepository = profileRepository;
-        this.userEventRepository = userEventRepository;
+        this.invitationRepository = invitationRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -53,14 +52,14 @@ public class EventService {
         newEvent.setAttendees(new HashSet<>());
         newEvent = eventRepository.save(newEvent);
 
-        UserEvent userEvent = new UserEvent();
-        userEvent.setProfile(organizer);
-        userEvent.setEvent(newEvent);
-        userEvent.setRsvpStatus(Status.ATTENDING);
-        userEvent.setTimestamp(LocalDateTime.now());
-        userEventRepository.save(userEvent);
+        Invitation invitation = new Invitation();
+        invitation.setProfile(organizer);
+        invitation.setEvent(newEvent);
+        invitation.setRsvpStatus(Status.ATTENDING);
+        invitation.setTimestamp(LocalDateTime.now());
+        invitationRepository.save(invitation);
 
-        newEvent.getAttendees().add(userEvent);
+        newEvent.getAttendees().add(invitation);
         newEvent = eventRepository.save(newEvent);
 
         organizer.getOrganizedEvents().add(newEvent);

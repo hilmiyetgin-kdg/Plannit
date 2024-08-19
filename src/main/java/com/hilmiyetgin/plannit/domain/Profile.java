@@ -34,7 +34,7 @@ public class Profile {
     @OneToMany(mappedBy = "organizer" ,fetch = FetchType.LAZY)
     private Set<Event> organizedEvents;
     @OneToMany(mappedBy = "profile", fetch = FetchType.LAZY)
-    private Set<UserEvent> attendedEvents;
+    private Set<Invitation> attendedEvents;
 
     public Profile() {
     }
@@ -114,11 +114,11 @@ public class Profile {
         this.organizedEvents = organizedEvents;
     }
 
-    public Set<UserEvent> getAttendedEvents() {
+    public Set<Invitation> getAttendedEvents() {
         return attendedEvents;
     }
 
-    public void setAttendedEvents(Set<UserEvent> attendedEvents) {
+    public void setAttendedEvents(Set<Invitation> attendedEvents) {
         this.attendedEvents = attendedEvents;
     }
 }

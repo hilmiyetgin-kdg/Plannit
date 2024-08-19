@@ -32,12 +32,12 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY)
     private Profile organizer;
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private Set<UserEvent> attendees;
+    private Set<Invitation> attendees;
 
     public Event() {
     }
 
-    public Event(String title, String description, String location, LocalDateTime startDate, LocalDateTime endDate, Profile organizer, Set<UserEvent> attendees) {
+    public Event(String title, String description, String location, LocalDateTime startDate, LocalDateTime endDate, Profile organizer, Set<Invitation> attendees) {
         this.title = title;
         this.description = description;
         this.location = location;
@@ -95,11 +95,11 @@ public class Event {
         this.organizer = organizer;
     }
 
-    public Set<UserEvent> getAttendees() {
+    public Set<Invitation> getAttendees() {
         return attendees;
     }
 
-    public void setAttendees(Set<UserEvent> attendees) {
+    public void setAttendees(Set<Invitation> attendees) {
         this.attendees = attendees;
     }
 
