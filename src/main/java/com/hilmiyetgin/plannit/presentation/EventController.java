@@ -1,6 +1,7 @@
 package com.hilmiyetgin.plannit.presentation;
 
 import com.hilmiyetgin.plannit.domain.Event;
+import com.hilmiyetgin.plannit.exceptions.EventNotFoundException;
 import com.hilmiyetgin.plannit.exceptions.InvalidDateException;
 import com.hilmiyetgin.plannit.exceptions.ProfileNotFoundException;
 import com.hilmiyetgin.plannit.presentation.DTO.EventDTO;
@@ -43,6 +44,16 @@ public class EventController {
     }
 
     //read
+    @GetMapping("{id}")
+    public ResponseEntity<EventDTO> getEventById(@PathVariable long id){
+        try{
+            Event event = eventService.getEventById(id);
+            EventDTO responseDTO = modelMapper.map(event, EventDTO.class);
+            return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+        } catch (EventNotFoundException e){
+            throw new EventNotFoundException(id);
+        }
+    }
 
 
     //update

@@ -79,4 +79,4 @@ DELETE http://localhost:8080/api/profiles/999
 
 ### API: Get events organized by a user
 
-GET http://localhost:8080/api/profiles/4/events
+GET http://localhost:8080/api/profiles/1/events

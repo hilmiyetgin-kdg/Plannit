@@ -1,5 +1,7 @@
 package com.hilmiyetgin.plannit.domain;
 import jakarta.persistence.*;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +17,7 @@ public class Profile {
     private String username;
     @NotBlank
     @Column(nullable = false, unique = true)
+    @Email
     private String email;
     @Transient
     @NotBlank

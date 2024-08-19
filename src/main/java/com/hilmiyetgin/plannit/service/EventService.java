@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -49,6 +50,7 @@ public class EventService {
 
         Event newEvent = modelMapper.map(dto, Event.class);
         newEvent.setOrganizer(organizer);
+        newEvent.setAttendees(new HashSet<>());
         newEvent = eventRepository.save(newEvent);
 
         UserEvent userEvent = new UserEvent();
@@ -58,11 +60,13 @@ public class EventService {
         userEvent.setTimestamp(LocalDateTime.now());
         userEventRepository.save(userEvent);
 
+        newEvent.getAttendees().add(userEvent);
+        newEvent = eventRepository.save(newEvent);
+
         organizer.getOrganizedEvents().add(newEvent);
         profileRepository.save(organizer);
 
         return newEvent;
-
     }
 
 

@@ -53,7 +53,7 @@ public class ProfileController {
         return ResponseEntity.ok(modelMapper.map(profile, ProfileDTO.class));
     }
 
-    //should this method be in EventController?
+    //TODO: should this method be in EventController?
     @GetMapping("/{organizerId}/events")
     public ResponseEntity<List<EventDTO>> getEventsByOrganizer(@PathVariable Long organizerId) {
         List<Event> events = eventService.getEventsByOrganizer(organizerId);
