@@ -82,9 +82,10 @@ public class EventService {
         return eventRepository.findByOrganizer(organizer);
     }
 
-    public List<Event> getAllEvents(long id){
+    public List<Event> getAllEvents(){
         return eventRepository.findAll();
     }
+
 
     //update
 

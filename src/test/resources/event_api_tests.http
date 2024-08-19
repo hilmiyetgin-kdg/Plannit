@@ -6,6 +6,10 @@ GET http://localhost:8080
 
 GET http://localhost:8080/api/events/1
 
+### API: Get all events
+
+GET http://localhost:8080/api/events
+
 ### API: Create a new event
 
 POST http://localhost:8080/api/events
